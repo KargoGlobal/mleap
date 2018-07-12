@@ -7,3 +7,29 @@ metastore_db/
 *.iml
 unsafe.*
 /python/**/*.pyc
+
+### OSX ###
+.DS_Store
+.AppleDouble
+.LSOverride
+
+## File-based project format:
+*.ipr
+*.iws
+
+# IntelliJ
+out/
+
+# mpeltonen/sbt-idea plugin
+.idea_modules/
+
+activator
+activator-launch-1.2.10.jar
+
+# Temporary rules
+temp/
+
+# Spark
+
+spark-warehouse
+
