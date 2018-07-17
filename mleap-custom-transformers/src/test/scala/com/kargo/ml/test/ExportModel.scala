@@ -34,17 +34,7 @@ object ExportModel extends App {
   (for (bundle <- managed(BundleFile(s"jar:file:${System.getProperty("user.dir")}/models/titanic-model-json.zip"))) yield {
     model.writeBundle.format(SerializationFormat.Json).save(bundle)(context).get
   }).tried.get
-  //
-  //
-  //  // serializing the model into ProtoBuf format and storing it to temporary file, after serializing we can directly load it to our serving model as well.
-  //  (for (bundle <- managed(BundleFile(s"jar:file:${System.getProperty("user.dir")}/models/titanic-model-protobuf.zip"))) yield {
-  //    model.writeBundle.format(SerializationFormat.Protobuf).save(bundle)(context).get
-  //  }).tried.get
-
-  // Spark Databricks Export
-
 
   spark.stop()
-  println("finish")
 
 }

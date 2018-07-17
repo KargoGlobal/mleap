@@ -62,6 +62,8 @@ object MLeapHelper {
     schema
   }
 
-  case class Titanic(PassengerId: Int, Pclass: Int, Name: String, Sex: String, Age: Double, SibSp: Int, Parch: Int, Ticket: String, Fare: Double, Cabin: String, Embarked: String)
+  case class Titanic(PassengerId: Int, Pclass: Int, Name: String,
+                     Sex: String, Age: Double, SibSp: Int, Parch: Int,
+                     Ticket: String, Fare: Double, Cabin: String, Embarked: String)
 
 }
