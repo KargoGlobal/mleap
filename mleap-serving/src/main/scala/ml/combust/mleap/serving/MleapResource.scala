@@ -49,7 +49,8 @@ class MleapResource(service: MleapService)
         } ~ path("transform") {
           post {
             entity(as[DefaultLeapFrame]) {
-              frame => complete(service.transform(frame))
+              frame =>
+                complete(service.transform(frame))
             }
           }
         }

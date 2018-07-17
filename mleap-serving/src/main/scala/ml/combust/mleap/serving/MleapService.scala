@@ -37,9 +37,26 @@ class MleapService()
   }
 
   def transform(frame: DefaultLeapFrame): Try[DefaultLeapFrame] = synchronized {
-    bundle.map {
-      _.root.transform(frame)
-    }.getOrElse(Failure(new IllegalStateException("no transformer loaded")))
+
+    val baseBundle = bundle.getOrElse(None)
+    if(baseBundle == None)
+      Failure(new IllegalStateException("no transformer loaded"))
+    else {
+      val baseFrame = bundle.get.root.transform(frame)
+      baseFrame match {
+        case Success (resFrame) => {
+          val cols = Array("prediction", "score", "rawScore")
+          if(resFrame.schema.hasField("prediction") && resFrame.schema.hasField("score") && resFrame.schema.hasField("rawScore")) {
+            resFrame.select(cols: _*)
+          }
+          else {
+            baseFrame
+          }
+        }
+        case Failure(resFrame) => Failure(resFrame)
+      }
+    }
+
   }
 
   def getSchema: Try[StructType] = synchronized {
