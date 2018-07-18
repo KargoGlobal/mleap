@@ -16,15 +16,33 @@ Steps to Write a Custom Transformer -
 5. Build bundle serialization for Spark.
 6. Configure the MLeap Bundle registries with the MLeap and Spark custom transformer.
 
-Building jar file
+publish jar file to our S3 repository and Local
 
 ```
-git clone git@github.com:KargoGlobal/mlLibs.git
-cd mlLibs
+git clone https://github.com/KargoGlobal/mleap
+cd mleap/mleap-custom-transformers/
+sbt clean compile publish // publish to S3
+sbt clean compile publishLocal
 ```
 
 ```sbtshell
-sbt assembly 
+sbt assembly
 ```
 This will give you a jar at `target/kargo-ml-transformers-.01.jar`
+
+Building the MLeap-Server with all Custom Transformation
+
+```
+git clone https://github.com/KargoGlobal/mleap
+cd mleap
+git submodule init
+git submodule update
+cd mleap-custom-transformers/
+sbt clean compile publishLocal
+cd ..
+sbt clean update compile
+sbt mleap-serving/clean
+sbt mleap-serving/update
+sbt mleap-serving/docker:publishLocal
+```
 
